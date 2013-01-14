@@ -1,0 +1,86 @@
+/*
+ * Copyright (c) 2012, Morten Kjaergaard
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Morten Kjaergaard nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/**
+ *
+ *
+ * \author Morten Kjaergaard
+ */
+
+#pragma once
+
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+
+#include <iris/severity_type.hpp>
+#include <iris/arg.hpp>
+
+namespace iris
+{
+
+class logger
+{
+protected:
+  SeverityType severity_;
+  std::string empty_;
+
+  static logger instance_;
+
+  logger() :
+    severity_(iris::All)
+  {
+  }
+
+  bool is_severity_logged_(const SeverityType severity)
+  {
+    return severity <= severity_;
+  }
+
+public:
+  static logger& instance()
+  {
+    return instance_;
+  }
+
+  static bool is_severity_logged(const SeverityType severity)
+  {
+    return logger::instance().is_severity_logged_(severity);
+  }
+
+  static void log1(int severity,
+                   const char * scope,
+                   const char * event,
+                   const char * name1 = "", const std::string& arg1 = logger::instance_.empty_,
+                   const char * name2 = "", const std::string& arg2 = logger::instance_.empty_,
+                   const char * name3 = "", const std::string& arg3 = logger::instance_.empty_,
+                   const char * name4 = "", const std::string& arg4 = logger::instance_.empty_);
+
+};
+
+}
