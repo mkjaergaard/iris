@@ -1,6 +1,6 @@
 <package>
   <name>iris</name>
-  <version>0.1.0-pre</version>
+  <version>0.1.0</version>
   <description>Light, fast and generic logging frontend in modern C++.</description>
   <author>Morten Kjaergaard</author>
   <maintainer email="none@none.com">Morten Kjaergaard</maintainer>

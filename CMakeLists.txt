@@ -15,7 +15,7 @@ add_library(iris-printf
 )
 
 add_executable(iris_example1
-  src/example.cpp)
+  test/example.cpp)
 target_link_libraries(iris_example1 iris-printf -lstdc++)
 
 add_executable(iris_example2
