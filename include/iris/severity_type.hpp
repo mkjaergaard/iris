@@ -65,7 +65,7 @@ public:
     case Error:
       return "ERROR";
     case Warning:
-      return "WARN ";
+      return "\x1b[33mWARN\x1b[0m ";
     case Info:
       return "INFO ";
     case Debug:
