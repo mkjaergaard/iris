@@ -8,6 +8,9 @@ catkin_package(
   LIBRARIES iris-printf
 )
 
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+
 include_directories(include)
 
 add_library(iris-printf
